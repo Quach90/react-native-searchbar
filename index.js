@@ -12,6 +12,7 @@ import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { filter, some, includes } from 'lodash/collection';
 import { debounce } from 'lodash/function';
+import { getStatusBarHeight } from "react-native-status-bar-height";
 
 const INITIAL_TOP = Platform.OS === 'ios' ? -80 : -60;
 
@@ -267,7 +268,7 @@ export default class Search extends Component {
         {this.state.show && (
           <View style={[styles.navWrapper, { backgroundColor }]}>
             {Platform.OS === 'ios' &&
-              iOSPadding && <View style={{ height: 20, backgroundColor: iOSPaddingBackgroundColor }} />}
+              iOSPadding && <View style={{ height: getStatusBarHeight(), backgroundColor: iOSPaddingBackgroundColor }} />}
             <View
               style={[
                 styles.nav,
@@ -362,6 +363,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     zIndex: 10,
+    top: 0,
     position: 'absolute',
     elevation: 2,
     shadowRadius: 5
